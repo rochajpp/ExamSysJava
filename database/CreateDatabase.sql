@@ -9,3 +9,6 @@ CREATE TABLE exam(
     option4 VARCHAR(10),
     option5 VARCHAR(10),
     answer VARCHAR(10));
+
+
+INSERT INTO exam (question) VALUES ("Teste");
