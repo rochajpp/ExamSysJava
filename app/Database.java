@@ -11,7 +11,7 @@ public class Database {
     private static String user = "root";
 
     public List<Exam> getExam(){
-        List<Exam> exams = new ArrayList<Exam>();
+        List<Exam> exam = new ArrayList<Exam>();
         try{
             Connection connection = DriverManager.getConnection(url, user, password);
             String query = "SELECT * FROM exam";
@@ -32,14 +32,14 @@ public class Database {
                     result.getString("answer")
                 );
 
-                exams.add(newExam);
+                exam.add(newExam);
             }
 
-            return exams;
+            return exam;
 
         }catch(Exception e){
             System.err.println(e);
-            return exams;
+            return exam;
         }
     }
 }
