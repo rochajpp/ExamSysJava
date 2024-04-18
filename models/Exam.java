@@ -8,7 +8,7 @@ public class Exam {
     private String option3;
     private String option4;
     private String option5;
-    private Character answer;
+    private String answer;
 
     public Exam(){
 
@@ -18,7 +18,7 @@ public class Exam {
         this.id = id;
     }
     
-    public Exam(int id, String question, String option1, String option2, String option3, String option4, String option5, Character answer){
+    public Exam(int id, String question, String option1, String option2, String option3, String option4, String option5, String answer){
         this.id = id;
         this.question = question;
         this.option1 = option1;
@@ -71,10 +71,10 @@ public class Exam {
     public void setOption5(String option5) {
         this.option5 = option5;
     }
-    public Character getAnswer() {
+    public String getAnswer() {
         return answer;
     }
-    public void setAnswer(Character answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 

@@ -22,7 +22,7 @@ public class Application{
 
         Collections.shuffle(exam);
 
-        HashMap<Integer, Character> template = new HashMap<>();
+        HashMap<Integer, String> template = new HashMap<>();
 
         for(int i = 0; i < exam.size(); i++){
             template.put(i + 1, exam.get(i).getAnswer());
