@@ -22,7 +22,7 @@ public class Database {
 
             while(result.next()){
                 Exam newExam = new Exam(
-                    result.getInt("id"), 
+                    result.getInt("id"),                 
                     result.getString("question"), 
                     result.getString("option1"),
                     result.getString("option2"),
