@@ -1,35 +1,30 @@
-import javax.swing.JOptionPane;
-import app.Database;
+import javax.swing.*;
 import models.Exam;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import app.*;
 
 public class Application{    
-
-    public static char question(Exam exam){
-
-        
-
-        return 'a';
-    }
     
     public static void main(String[] args){  
-        Database context = new Database();
 
-        List<Exam> exam = context.getExam();
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                Database context = new Database();
 
-        Collections.shuffle(exam);
+                List<Exam> exam = context.getExam();
 
-        HashMap<Integer, String> template = new HashMap<>();
+                Collections.shuffle(exam);
 
-        for(int i = 0; i < exam.size(); i++){
-            template.put(i + 1, exam.get(i).getAnswer());
-        }
+                HashMap<Integer, String> userResponse = new HashMap<>();    
 
-        for(int i = 0; i < exam.size(); i++){
-
-        }
+                new QuestionScreen(1, exam, userResponse);
+            }
+        });
+        
+        
     }
 }
