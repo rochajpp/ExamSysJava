@@ -18,8 +18,20 @@ public class QuestionScreen extends JFrame{
     private ButtonGroup group = new ButtonGroup();
     private JButton send;
 
-    public QuestionScreen(int number, List<Exam> exam, HashMap<Integer, String> userReponse){
-        initComponents(number, exam, userReponse);
+    private int number;
+    private List<Exam> exam;
+    private HashMap<Integer, String> userResponse;
+
+    public QuestionScreen(int number, List<Exam> exam, HashMap<Integer, String> userResponse){
+        this.number = number;
+        this.exam = exam;
+        this.userResponse = userResponse;
+
+        if(number == 10){
+            new ResultScreen(this.userResponse, this.exam);
+            return;
+        }
+        initComponents(number, exam, userResponse);
 
         Dimension screenSize = getToolkit().getScreenSize();
 
@@ -33,7 +45,7 @@ public class QuestionScreen extends JFrame{
 
     public void initComponents(int number, List<Exam> exam, HashMap<Integer, String> userReponse){
 
-        numberQuestion = new JLabel("Questão " + number);
+        numberQuestion = new JLabel("Questão " + (number + 1));
         numberQuestion.setFont(new Font("Segoe UI", Font.BOLD, 20)); 
 
         question = new JLabel(exam.get(number).getQuestion());
@@ -104,21 +116,39 @@ public class QuestionScreen extends JFrame{
 
         if(option1.isSelected()){
             String answer = "a";
+            this.userResponse.put(number, "a");
+            this.number++;
+            new QuestionScreen(this.number, this.exam, this.userResponse);
+            dispose(); 
         }
         if(option2.isSelected()){
             String answer = "b";
+            this.userResponse.put(number, "b");
+            this.number++;
+            new QuestionScreen(this.number, this.exam, this.userResponse);
+            dispose(); 
         }
         if(option3.isSelected()){
             String answer = "c";
+            this.userResponse.put(number, "c");
+            this.number++;
+            new QuestionScreen(this.number, this.exam, this.userResponse);
+            dispose(); 
         }
         if(option4.isSelected()){
             String answer = "d";
+            this.userResponse.put(number, "d");
+            this.number++;
+            new QuestionScreen(this.number, this.exam, this.userResponse);
+            dispose(); 
         }
         if(option5.isSelected()){
             String answer = "e";
+            this.userResponse.put(number, "e");
+            this.number++;
+            new QuestionScreen(this.number, this.exam, this.userResponse);
+            dispose(); 
         }
-
-
     }
 }
 

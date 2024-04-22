@@ -21,7 +21,9 @@ public class Application{
 
                 HashMap<Integer, String> userResponse = new HashMap<>();    
 
-                new QuestionScreen(1, exam, userResponse);
+                new QuestionScreen(0, exam, userResponse);
+
+                System.out.println("Quiz concluido com sucesso!");
             }
         });
         
