@@ -1,0 +1,9 @@
+CREATE DATABASE pooDb;
+
+CREATE TABLE Student(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    user VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    
+)
