@@ -1,4 +1,4 @@
-package app.models;
+package src.models;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -8,6 +8,4 @@ public class Exam {
     private String name;
     private Professor professor;
     private List<Question> questions;
-
-
 }
