@@ -4,6 +4,12 @@ CREATE DATABASE pooDb;
 
 SHOW TABLES;
 
+DELETE FROM exam;
+DELETE FROM student_exam;
+DELETE FROM student;
+DELETE FROM professor;
+DELETE FROM question;
+
 /*==================================*/
 
 
