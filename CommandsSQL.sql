@@ -4,6 +4,11 @@ CREATE DATABASE pooDb;
 
 SHOW TABLES;
 
+INSERT INTO student (name, user, password) VALUES ("Joao", "rocha", "joao1234");
+INSERT INTO exam ()
+INSERT INTO student_exam (id_student, id_exam, result) VALUES (1, 1, 9.2);
+SELECT * FROM student;
+
 DELETE FROM exam;
 DELETE FROM student_exam;
 DELETE FROM student;

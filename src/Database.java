@@ -3,11 +3,55 @@ import java.sql.*;
 import src.models.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Database {
     private static String password = "database";
     private static String url = "jdbc:mysql://localhost:3306/pooDb";
     private static String user = "root";
+
+    public Student loginStudent(String user){
+        try{
+            Connection connection = DriverManager.getConnection(url, this.user, password);
+            
+            String query = "SELECT * FROM student WHERE user = '"  + user + "'";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet result = preparedStatement.executeQuery();
+            if(result.next()){
+                Student student = new Student();             
+                student = new Student(
+                    result.getInt("id"), 
+                    result.getString("name"), 
+                    result.getString("user"), 
+                    result.getString("password")
+                );
+            
+
+                String queryExams = "SELECT * FROM student_exam WHERE id_student = " + student.getId();
+                PreparedStatement preparedStatement2 = connection.prepareStatement(queryExams);
+
+                ResultSet resultExams = preparedStatement2.executeQuery();
+
+                HashMap<Integer, Float> exams = new HashMap();
+
+                while(resultExams.next()){
+                    exams.put(resultExams.getInt("id_exam"), resultExams.getFloat("result"));
+                }
+
+                student.setExams(exams);
+
+                return student;
+            } else{
+                Student student = new Student();
+                return student;
+            }
+        } catch(Exception e){
+            System.err.println(e);
+            return null;
+        }
+    }
 
     public Exam getExam(int id){
         Exam exam = new Exam();
@@ -66,9 +110,10 @@ public class Database {
                 
                
                 exam = new Exam(result.getInt("id"), result.getString("name"), professor, questions);
+                connection.close();
                 return exam;  
             }
-
+            connection.close();
             return exam = new Exam();
 
            

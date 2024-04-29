@@ -58,10 +58,12 @@ public class Initial extends JFrame{
     }
 
     public void enterStudent(ActionEvent evt){
-
+        new StudentLogin();
+        dispose();
     }
 
     public void enterProfessor(ActionEvent evt){
-
+        new ProfessorLogin();
+        dispose();
     }
 }
