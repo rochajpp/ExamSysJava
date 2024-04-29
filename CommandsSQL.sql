@@ -1,5 +1,13 @@
 CREATE DATABASE pooDb;
 
+/*========== Actions Area ==========*/
+
+SHOW TABLES;
+
+/*==================================*/
+
+
+/*========== Create Tables ==========*/
 
 CREATE TABLE student(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -46,9 +54,12 @@ CREATE TABLE question(
     option5 VARCHAR(20) NOT NULl
 );
 
+/*===================================*/
 
+/*========== Drop Tables ==========*/
 DROP TABLE student_exam;
 DROP TABLE exam;
 DROP TABLE student;
 DROP TABLE professor;
 DROP TABLE question;
+/*=================================*/
