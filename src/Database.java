@@ -10,6 +10,66 @@ public class Database {
     private static String url = "jdbc:mysql://localhost:3306/pooDb";
     private static String user = "root";
 
+    public List<Exam> getAllExams(){
+        List<Exam> exams = new ArrayList();
+        Professor professor = new Professor();
+        List<Question> questions = new ArrayList();
+        try{
+            Connection connection = DriverManager.getConnection(url, this.user, password);
+
+            String query = "SELECT * FROM exam";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            while(result.next()){
+                String queryProfessor = "SELECT * FROM professor WHERE id=" + result.getInt("id_professor");
+                PreparedStatement preparedStatementProfessor = connection.prepareStatement(queryProfessor);
+                ResultSet resultProfessor = preparedStatementProfessor.executeQuery();
+
+                if(resultProfessor.next()){
+                    professor = new Professor(
+                        resultProfessor.getInt("id"),
+                        resultProfessor.getString("name"),
+                        resultProfessor.getString("user"),
+                        resultProfessor.getString("password")
+                    );
+                }
+
+                String queryQuestions = "SELECT * FROM question WHERE id_exam=" + result.getInt("id");
+                PreparedStatement preparedStatementQuestions = connection.prepareStatement(queryQuestions);
+                ResultSet resultQuestions = preparedStatementQuestions.executeQuery();
+                
+                while(resultQuestions.next()){
+                    Question question = new Question(
+                        resultQuestions.getInt("id"),
+                        resultQuestions.getInt("id_exam"),
+                        resultQuestions.getString("statement"),
+                        resultQuestions.getString("option1"),
+                        resultQuestions.getString("option2"),
+                        resultQuestions.getString("option3"),
+                        resultQuestions.getString("option4"),
+                        resultQuestions.getString("option5"),
+                        resultQuestions.getString("result")
+                    );
+
+                    questions.add(question);
+                }
+
+                Exam exam = new Exam(result.getInt("id"), result.getString("name"), professor, questions);
+                exams.add(exam);
+            }
+
+            connection.close();
+            return exams;
+
+        } catch(Exception e){
+            System.err.println(e);
+            return null;
+        }
+    }
+
     public Student loginStudent(String user){
         try{
             Connection connection = DriverManager.getConnection(url, this.user, password);
@@ -41,10 +101,11 @@ public class Database {
                 }
 
                 student.setExams(exams);
-
+                connection.close();
                 return student;
             } else{
                 Student student = new Student();
+                connection.close();
                 return student;
             }
         } catch(Exception e){
@@ -55,7 +116,6 @@ public class Database {
 
     public Exam getExam(int id){
         Exam exam = new Exam();
-
         try{
 
             Connection connection = DriverManager.getConnection(url, user, password);
@@ -86,7 +146,8 @@ public class Database {
                         resultQuestion.getString("option2"),
                         resultQuestion.getString("option3"),
                         resultQuestion.getString("option4"),
-                        resultQuestion.getString("option5")
+                        resultQuestion.getString("option5"),
+                        resultQuestion.getString("result")
 
                     );
                     questions.add(newQuestion);
