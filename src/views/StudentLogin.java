@@ -100,7 +100,7 @@ public class StudentLogin extends JFrame{
         }
 
         JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
-        new StudentArea();
+        new StudentArea(student);
         dispose();
     }
 

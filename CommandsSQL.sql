@@ -4,9 +4,6 @@ CREATE DATABASE pooDb;
 
 SHOW TABLES;
 
-INSERT INTO student (name, user, password) VALUES ("Joao", "rocha", "joao1234");
-INSERT INTO exam ()
-INSERT INTO student_exam (id_student, id_exam, result) VALUES (1, 1, 9.2);
 SELECT * FROM student;
 
 DELETE FROM exam;
@@ -42,9 +39,6 @@ CREATE TABLE exam(
     FOREIGN KEY (id_professor) REFERENCES professor(id)
 );
 
-INSERT INTO professor (name, user, password) VALUES ("João", "rocha", "joao1234");
-INSERT INTO exam (name, id_professor) VALUES ("Teste", 1);
-
 CREATE TABLE student_exam(
     id_student INT,
     id_exam INT,
@@ -58,11 +52,12 @@ CREATE TABLE question(
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_exam INT NOT NULL,
     statement VARCHAR(1000) NOT NULL,
-    option1 VARCHAR(20) NOT NULL,
-    option2 VARCHAR(20) NOT NULL,
-    option3 VARCHAR(20) NOT NULL,
-    option4 VARCHAR(20) NOT NULL,
-    option5 VARCHAR(20) NOT NULl
+    option1 VARCHAR(1000) NOT NULL,
+    option2 VARCHAR(200) NOT NULL,
+    option3 VARCHAR(200) NOT NULL,
+    option4 VARCHAR(200) NOT NULL,
+    option5 VARCHAR(200) NOT NULl,
+    result VARCHAR(4) NOT NULL
 );
 
 /*===================================*/
@@ -74,3 +69,5 @@ DROP TABLE student;
 DROP TABLE professor;
 DROP TABLE question;
 /*=================================*/
+
+
