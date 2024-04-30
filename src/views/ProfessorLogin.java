@@ -13,7 +13,7 @@ public class ProfessorLogin extends JFrame{
 
     public ProfessorLogin(){
         initComponents();
-
+        setTitle("Login Professor");
         setSize(420, 350);
         setLocationRelativeTo(null);
     }
@@ -26,7 +26,7 @@ public class ProfessorLogin extends JFrame{
         gbc.gridy = 0;
         gbc.gridx = 0;
 
-        title = new JLabel("Área Professor");
+        title = new JLabel("Login Professor");
         title.setFont(new Font("Segoe UI", Font.BOLD, 20));
         panel.add(title, gbc);
 

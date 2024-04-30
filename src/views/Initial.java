@@ -11,7 +11,7 @@ public class Initial extends JFrame{
 
     public Initial(){
         initComponents();
-
+        setTitle("Início");
         setSize(420, 350);
         setLocationRelativeTo(null);
     }

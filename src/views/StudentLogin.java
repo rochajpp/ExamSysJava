@@ -15,7 +15,7 @@ public class StudentLogin extends JFrame{
 
     public StudentLogin(){
         initComponents();
-
+        setTitle("Login Aluno");
         setSize(420, 350);
         setLocationRelativeTo(null);
     }
@@ -28,7 +28,7 @@ public class StudentLogin extends JFrame{
         gbc.gridy = 0;
         gbc.gridx = 0;
 
-        title = new JLabel("Área Aluno");
+        title = new JLabel("Login Aluno");
         title.setFont(new Font("Segoe UI", Font.BOLD, 20));
         panel.add(title, gbc);
 
@@ -100,6 +100,8 @@ public class StudentLogin extends JFrame{
         }
 
         JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+        new StudentArea();
+        dispose();
     }
 
     public void back(ActionEvent evt){
