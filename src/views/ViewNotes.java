@@ -1,6 +1,7 @@
 package src.views;
 import src.models.*;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -23,14 +24,14 @@ public class ViewNotes extends JFrame{
 
     public void initComponents(){
         JPanel panel = new JPanel(new GridBagLayout());
-        
-        GridBagConstraints gbc = new GridBagConstraints();
 
+        GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 0, 0, 0);
         gbc.gridy = 0;
         gbc.gridx = 0;
 
         title = new JLabel("Provas realizadas:");
+        title.setFont(new Font("Segoe UI", Font.BOLD, 20));
         panel.add(title, gbc);
 
         add(panel);
