@@ -5,6 +5,9 @@ import java.awt.event.*;
 import javax.swing.*;
 import src.models.*;
 import src.Database;
+
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -51,6 +54,12 @@ public class StudentArea extends JFrame{
             }
         }
 
+        if(modelList.isEmpty()){
+            JLabel empty = new JLabel("Nenhuma prova disponível!");
+            gbc.gridy++;
+            panel.add(empty, gbc);
+        }
+
         list = new JList<>(modelList);
 
         list.addMouseListener(new MouseAdapter() {
@@ -63,7 +72,9 @@ public class StudentArea extends JFrame{
                     int idExam = Integer.parseInt(infoExam[0].replaceAll("\\s", ""));
                     
                     Exam examSelected = database.getExam(idExam);
-                    new TestApplication(examSelected);
+                    HashMap<Integer, String> userResponse = new HashMap();
+                    Collections.shuffle(examSelected.getQuestions());
+                    new TestApplication(0, examSelected, userResponse, student);
                     dispose();
                 }
             }
@@ -88,7 +99,8 @@ public class StudentArea extends JFrame{
     }
 
     public void viewNotes(ActionEvent evt){
-
+        new ViewNotes(this.student);
+        dispose();
     }
 }
 

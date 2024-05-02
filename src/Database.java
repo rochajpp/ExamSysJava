@@ -2,6 +2,9 @@ package src;
 import java.sql.*;
 import src.models.*;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -70,7 +73,7 @@ public class Database {
         }
     }
 
-    public Student loginStudent(String user){
+    public Student getStudent(String user){
         try{
             Connection connection = DriverManager.getConnection(url, this.user, password);
             
@@ -183,5 +186,23 @@ public class Database {
             System.err.println(e);
             return exam = new Exam();
         }
+    }
+
+    public void saveStudentExam(StudentExam studentExam){
+        try{
+            Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
+
+            String query = "INSERT INTO student_exam (id_student, id_exam, result) VALUES (" + studentExam.getIdStudent() + ", " + studentExam.getIdExam() + ", " + studentExam.getResult() + ")";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            int result = preparedStatement.executeUpdate();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao salvar a prova, contate o administrador!");
+            System.err.println(e);
+            return;
+        }
+
+
     }
 }

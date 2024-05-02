@@ -87,7 +87,7 @@ public class StudentLogin extends JFrame{
             return;
         }
       
-        Student student = database.loginStudent(user);
+        Student student = database.getStudent(user);
         
         if(student == null){
             JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, contate o administrador do sistema!");
