@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.util.Map;
 
 import javax.swing.*;
@@ -14,6 +16,7 @@ public class ViewNotes extends JFrame{
     private Database db = new Database();
     
     private JLabel title;
+    private JButton back;
 
     public ViewNotes(Student student){
         this.student = student;
@@ -38,10 +41,27 @@ public class ViewNotes extends JFrame{
 
         for (Map.Entry<Integer, Float> entry : student.getExams().entrySet()) {
             Exam exam = db.getExam(entry.getKey());
-            JLabel examLabel = new JLabel(exam.getId() + " - " + exam.getName() + " Professor: " + exam.getProfessor().getName() + " Nota: " + entry.getValue());
+            JLabel examLabel = new JLabel(exam.getId() + " - " + exam.getName() + " Professor: " + exam.getProfessor().getName() + " / Nota: " + entry.getValue());
+            gbc.gridy++;
+            panel.add(examLabel, gbc);
         }
+
+        back = new JButton("Voltar");
+        back.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                back(evt);
+            }
+        });
+
+        gbc.gridy++;
+        panel.add(back, gbc);
 
         add(panel);
         setVisible(true);
+    }
+
+    public void back(ActionEvent evt){
+        new StudentArea(this.student);
+        dispose();
     }
 }
