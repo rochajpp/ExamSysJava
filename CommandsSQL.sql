@@ -6,6 +6,10 @@ SHOW TABLES;
 
 SELECT * FROM student;
 
+SELECT * FROM professor;
+
+SELECT * FROM exam;
+
 SELECT * FROM student_exam;
 
 DELETE FROM student_exam WHERE id_student = 4;

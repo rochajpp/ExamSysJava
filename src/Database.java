@@ -195,8 +195,10 @@ public class Database {
             String query = "INSERT INTO student_exam (id_student, id_exam, result) VALUES (" + studentExam.getIdStudent() + ", " + studentExam.getIdExam() + ", " + studentExam.getResult() + ")";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-
+            
             int result = preparedStatement.executeUpdate();
+
+            connection.close();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao salvar a prova, contate o administrador!");
             System.err.println(e);
@@ -204,5 +206,85 @@ public class Database {
         }
 
 
+    }
+
+    public Professor getProfessor(String user){
+        try{
+            Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
+
+            String getProfessorQuery = "SELECT * FROM professor WHERE user='" + user + "'";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(getProfessorQuery);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            Professor professor = new Professor();
+            if(result.next()){
+                professor = new Professor(
+                    result.getInt("id"),
+                    result.getString("name"),
+                    result.getString("user"),
+                    result.getString("password")
+                );
+            }
+            
+            connection.close();
+            return professor;
+
+        } catch(Exception e){
+            System.err.println(e);
+            return null;
+        }
+    }
+
+    public List<Exam> getExamsByProfessor(Professor professor){
+        try{
+            Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
+
+            String getExams = "SELECT * FROM exam WHERE id_professor=" + professor.getId();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(getExams);
+
+            ResultSet result = preparedStatement.executeQuery();
+
+            List<Exam> exams = new ArrayList<Exam>();
+            while(result.next()){
+                String getQuestions = "SELECT * FROM question WHERE id_exam=" + result.getInt("id");
+                preparedStatement = connection.prepareStatement(getQuestions);
+
+                ResultSet resultQuestions = preparedStatement.executeQuery();
+
+                List<Question> questions = new ArrayList<Question>();
+                while(resultQuestions.next()){
+                    
+                    Question question = new Question(
+                        resultQuestions.getInt("id"),
+                        resultQuestions.getInt("id_exam"),
+                        resultQuestions.getString("statement"),
+                        resultQuestions.getString("option1"),
+                        resultQuestions.getString("option2"),
+                        resultQuestions.getString("option3"),
+                        resultQuestions.getString("option4"),
+                        resultQuestions.getString("option5"),
+                        resultQuestions.getString("result")
+                    );
+
+                    questions.add(question);
+                }
+                Exam exam = new Exam(
+                    result.getInt("id"),
+                    result.getString("name"),
+                    professor,
+                    questions
+                );
+
+                exams.add(exam);
+            }
+
+            return exams;
+        } catch(Exception e){
+            System.err.println(e);
+            return null;
+        }
     }
 }

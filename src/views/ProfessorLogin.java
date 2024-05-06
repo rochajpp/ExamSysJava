@@ -1,6 +1,10 @@
 package src.views;
 
 import javax.swing.*;
+
+import src.Database;
+import src.models.Professor;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -75,7 +79,31 @@ public class ProfessorLogin extends JFrame{
     }
 
     public void enter(ActionEvent evt){
+        Database database = new Database();
 
+        String user = userInput.getText();
+        String pass = new String(passInput.getPassword());
+
+        if(user.isEmpty() || pass.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+            return;
+        }
+      
+        Professor professor = database.getProfessor(user);
+        
+        if(professor == null){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, contate o administrador do sistema!");
+            return;
+        }
+        
+        if(professor.getId() == 0 || !professor.getPassword().equals(pass)){
+            JOptionPane.showMessageDialog(null, "Credencias incorretas!");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+        new ProfessorArea(professor);
+        dispose();
     }
 
     public void back(ActionEvent evt){
