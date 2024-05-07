@@ -42,7 +42,7 @@ public class ProfessorArea extends JFrame{
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets = new Insets(10, 0, 0, 0);
+        gbc.insets = new Insets(10, 0, 10, 0);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -78,7 +78,12 @@ public class ProfessorArea extends JFrame{
             }
         });
 
-        add(panel);
+        JScrollPane scrollPane = new JScrollPane(panel);
+            
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        getContentPane().add(scrollPane);
         setVisible(true);
     }
 

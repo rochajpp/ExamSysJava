@@ -180,8 +180,6 @@ public class Database {
             connection.close();
             return exam = new Exam();
 
-           
-
         }catch(Exception e){
             System.err.println(e);
             return exam = new Exam();
@@ -199,6 +197,8 @@ public class Database {
             int result = preparedStatement.executeUpdate();
 
             connection.close();
+            return;
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Erro ao salvar a prova, contate o administrador!");
             System.err.println(e);
@@ -281,10 +281,37 @@ public class Database {
                 exams.add(exam);
             }
 
+            connection.close();
             return exams;
         } catch(Exception e){
             System.err.println(e);
             return null;
+        }
+    }
+
+    public int saveExam(String name, Professor professor){
+        try{
+            Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
+
+            String insertExam = "INSERT INTO exam (name, id_professor) VALUES ('" + name + "', " + professor.getId() + ")";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(insertExam, Statement.RETURN_GENERATED_KEYS);
+
+            int result = preparedStatement.executeUpdate();
+
+            if(result == 1){
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+                System.out.println();
+                if(resultSet.next()){
+                    int id = resultSet.getInt(1);
+                    return id;
+                }  
+            }
+            connection.close();
+            return 0;
+        } catch(Exception e){
+            System.err.println(e);
+            return 0;
         }
     }
 }

@@ -20,6 +20,8 @@ DELETE FROM student;
 DELETE FROM professor;
 DELETE FROM question;
 
+DELETE FROM exam WHERE name = "a";
+
 /*==================================*/
 
 
