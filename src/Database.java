@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
-    private static String password = "database";
-    private static String url = "jdbc:mysql://localhost:3306/pooDb";
-    private static String user = "root";
+    private String password = "database";
+    private String url = "jdbc:mysql://localhost:3306/pooDb";
+    private String user = "root";
 
     public List<Exam> getAllExams(){
-        List<Exam> exams = new ArrayList();
+        List<Exam> exams = new ArrayList<Exam>();
         Professor professor = new Professor();
-        List<Question> questions = new ArrayList();
+        List<Question> questions = new ArrayList<Question>();
         try{
             Connection connection = DriverManager.getConnection(url, this.user, password);
 
@@ -97,7 +97,7 @@ public class Database {
 
                 ResultSet resultExams = preparedStatement2.executeQuery();
 
-                HashMap<Integer, Float> exams = new HashMap();
+                HashMap<Integer, Float> exams = new HashMap<Integer, Float>();
 
                 while(resultExams.next()){
                     exams.put(resultExams.getInt("id_exam"), resultExams.getFloat("result"));
@@ -194,7 +194,7 @@ public class Database {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             
-            int result = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
             connection.close();
             return;
@@ -323,7 +323,8 @@ public class Database {
 
             PreparedStatement preparedStatement = connection.prepareStatement(saveQuestion);
 
-            int result = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
+            connection.close();
 
             return;
                 

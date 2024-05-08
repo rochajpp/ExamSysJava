@@ -72,7 +72,7 @@ public class StudentArea extends JFrame{
                     int idExam = Integer.parseInt(infoExam[0].replaceAll("\\s", ""));
                     
                     Exam examSelected = database.getExam(idExam);
-                    HashMap<Integer, String> userResponse = new HashMap();
+                    HashMap<Integer, String> userResponse = new HashMap<Integer, String>();
                     Collections.shuffle(examSelected.getQuestions());
                     new TestApplication(0, examSelected, userResponse, student);
                     dispose();

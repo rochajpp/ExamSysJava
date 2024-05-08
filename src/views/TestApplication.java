@@ -1,6 +1,5 @@
 package src.views;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,7 +7,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.swing.*;
 
@@ -129,38 +127,32 @@ public class TestApplication extends JFrame{
     }
 
     public void sendQuestion(){
-        StringBuilder selected = new StringBuilder();
 
         if(option1.isSelected()){
-            String answer = "a";
             this.userResponse.put(number, "a");
             this.number++;
             new TestApplication(this.number, this.exam, this.userResponse, this.student);
             dispose(); 
         }
         if(option2.isSelected()){
-            String answer = "b";
             this.userResponse.put(number, "b");
             this.number++;
             new TestApplication(this.number, this.exam, this.userResponse, this.student);
             dispose(); 
         }
         if(option3.isSelected()){
-            String answer = "c";
             this.userResponse.put(number, "c");
             this.number++;
             new TestApplication(this.number, this.exam, this.userResponse, this.student);
             dispose(); 
         }
         if(option4.isSelected()){
-            String answer = "d";
             this.userResponse.put(number, "d");
             this.number++;
             new TestApplication(this.number, this.exam, this.userResponse, this.student);
             dispose(); 
         }
         if(option5.isSelected()){
-            String answer = "e";
             this.userResponse.put(number, "e");
             this.number++;
             new TestApplication(this.number, this.exam, this.userResponse, this.student);
