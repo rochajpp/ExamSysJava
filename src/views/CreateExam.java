@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.List;
-import java.util.ArrayList;
 
 public class CreateExam extends JFrame{
 
@@ -79,9 +77,8 @@ public class CreateExam extends JFrame{
         if(result == 0){
             int id = db.saveExam(name, this.professor);
             int count = 1;
-            List<Question> questions = new ArrayList<Question>();
     
-            new CreateQuestions(id, questions, count);
+            new CreateQuestions(id, count);
             dispose();
             
         }

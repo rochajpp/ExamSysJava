@@ -314,4 +314,22 @@ public class Database {
             return 0;
         }
     }
+
+    public void saveQuestion(Question question){
+        try{
+            Connection connection = DriverManager.getConnection(this.url, this.user, this.password);
+
+            String saveQuestion = "INSERT INTO question (id_exam, statement, option1, option2, option3, option4, option5, result) VALUES (" + question.getIdExam() + ", '" + question.getStatement() + "', '" + question.getOption1() + "', '" + question.getOption2() + "', '" + question.getOption3() + "', '" + question.getOption4() + "', '" + question.getOption5() + "', '" + question.getResult() + "')";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(saveQuestion);
+
+            int result = preparedStatement.executeUpdate();
+
+            return;
+                
+        } catch(Exception e){
+            System.err.println(e);
+            return;
+        }
+    }
 }

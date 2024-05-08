@@ -12,6 +12,8 @@ SELECT * FROM exam;
 
 SELECT * FROM student_exam;
 
+SELECT * FROM question;
+
 DELETE FROM student_exam WHERE id_student = 4;
 
 DELETE FROM exam;
@@ -20,7 +22,7 @@ DELETE FROM student;
 DELETE FROM professor;
 DELETE FROM question;
 
-DELETE FROM exam WHERE name = "a";
+DELETE FROM exam WHERE name = "a" OR name = "Teste";
 
 /*==================================*/
 

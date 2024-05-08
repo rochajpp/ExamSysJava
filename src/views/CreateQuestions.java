@@ -4,33 +4,35 @@ import src.Database;
 import src.models.*;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class CreateQuestions extends JFrame{
     private Database db;
-    private List<Question> questions;
     private int idExam;
     private int count;
 
     private JLabel title, statementLabel, option1Label, option2Label, option3Label,option4Label,option5Label, resultLabel;
-    private JTextField resultInput;
+    private JComboBox<String> resultInput;
     private JTextArea option1Input, option2Input, option3Input,option4Input,option5Input, statementInput;
 
     private JButton confirm;
 
-    public CreateQuestions(int idExam, List<Question> questions, int count){
-
-        if(count > 10){
-            //Questões finalizadas
-        
-        }
+    public CreateQuestions(int idExam, int count){
         this.db = new Database();
-        this.questions = questions;
         this.idExam = idExam;
         this.count = count;
 
+        if(count > 10){
+            JOptionPane.showMessageDialog(null, "Questões cadastradas com sucesso!");
+            Exam exam = db.getExam(this.idExam);
+            new ProfessorArea(exam.getProfessor());
+            return;
+        }
+      
         initComponents();
 
         setSize(420, 350);
@@ -108,8 +110,24 @@ public class CreateQuestions extends JFrame{
         gbc.gridy++;
         panel.add(option5Input, gbc);
 
+        resultLabel = new JLabel("Resultado");
+        resultLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        gbc.gridy++;
+        panel.add(resultLabel, gbc);
+
+        String[] results = {"", "A", "B", "C", "D", "E"};
+        resultInput = new JComboBox<String>(results);
+        gbc.gridy++;
+        panel.add(resultInput, gbc);
+
         confirm = new JButton("Confirmar");
-        
+        confirm.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                confirm(evt);
+            }
+        });
+        gbc.gridy++;
+        panel.add(confirm, gbc);
 
         JScrollPane scrollPane = new JScrollPane(panel);
             
@@ -118,5 +136,28 @@ public class CreateQuestions extends JFrame{
         
         add(scrollPane);
         setVisible(true);
+    }
+
+    public void confirm(ActionEvent evt){
+        String statement = statementInput.getText();
+        String option1 = option1Input.getText();
+        String option2 = option2Input.getText();
+        String option3 = option3Input.getText();
+        String option4 = option4Input.getText();
+        String option5 = option5Input.getText();
+        String result = resultInput.getSelectedItem().toString();
+
+        if(statement.isEmpty() || option1.isEmpty() || option2.isEmpty() || option3.isEmpty() || option4.isEmpty() || option5.isEmpty() || result.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+
+        Question question = new Question(this.idExam, statement, option1, option2, option3, option4, option5, result);
+        db.saveQuestion(question);
+        
+        this.count++;
+        new CreateQuestions(this.idExam, this.count);
+        dispose();
+        return;
     }
 }
