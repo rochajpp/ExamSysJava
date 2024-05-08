@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -112,38 +111,32 @@ public class QuestionScreen extends JFrame{
     }
 
     public void sendQuestion(){
-        StringBuilder selected = new StringBuilder();
 
         if(option1.isSelected()){
-            String answer = "a";
             this.userResponse.put(number, "a");
             this.number++;
             new QuestionScreen(this.number, this.exam, this.userResponse);
             dispose(); 
         }
         if(option2.isSelected()){
-            String answer = "b";
             this.userResponse.put(number, "b");
             this.number++;
             new QuestionScreen(this.number, this.exam, this.userResponse);
             dispose(); 
         }
         if(option3.isSelected()){
-            String answer = "c";
             this.userResponse.put(number, "c");
             this.number++;
             new QuestionScreen(this.number, this.exam, this.userResponse);
             dispose(); 
         }
         if(option4.isSelected()){
-            String answer = "d";
             this.userResponse.put(number, "d");
             this.number++;
             new QuestionScreen(this.number, this.exam, this.userResponse);
             dispose(); 
         }
         if(option5.isSelected()){
-            String answer = "e";
             this.userResponse.put(number, "e");
             this.number++;
             new QuestionScreen(this.number, this.exam, this.userResponse);
